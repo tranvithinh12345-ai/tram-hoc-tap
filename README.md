@@ -3,63 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Góc Học Tập của Thịnh</title>
+    <title>Bài 9: Định Luật Boyle - Vật Lí 12 (Kết nối tri thức)</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --math-color: #e74c3c;
-            --physics-color: #f1c40f;
-            --literature-color: #9b59b6;
-            --bg-color: #ecf0f1;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--bg-color); color: #333; padding-top: 70px; }
-        nav { background: var(--primary-color); color: white; padding: 1rem; position: fixed; width: 100%; top: 0; z-index: 1000; text-align: center; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        h1 { text-align: center; margin-bottom: 30px; color: var(--primary-color); }
-        .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .subject-card { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .subject-card h2 { border-bottom: 3px solid; padding-bottom: 10px; margin-bottom: 15px; }
-        .math { border-color: var(--math-color); color: var(--math-color); }
-        .physics { border-color: var(--physics-color); color: var(--physics-color); }
-        .literature { border-color: var(--literature-color); color: var(--literature-color); }
-        .note-list { list-style: none; }
-        .note-list li { background: #f9f9f9; margin-bottom: 8px; padding: 10px; border-left: 5px solid #ccc; border-radius: 3px; }
-        .add-btn { width: 100%; padding: 10px; margin-top: 10px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        footer { text-align: center; padding: 30px; margin-top: 50px; font-size: 0.9rem; color: #7f8c8d; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; color: #f8fafc; overflow: hidden; height: 100vh; }
+        .slide-container { width: 100vw; height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .slide { width: 100vw; height: 100vh; scroll-snap-align: start; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; position: relative; }
+        
+        .card { background: rgba(30, 41, 59, 0.95); border: 1px solid #334155; border-radius: 16px; padding: 32px; width: 90%; max-width: 1100px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5); }
+        h1 { font-size: 2.5rem; color: #38bdf8; margin-bottom: 15px; text-align: center; }
+        h2 { font-size: 1.8rem; color: #fbbf24; margin-bottom: 20px; border-bottom: 2px solid #334155; padding-bottom: 8px; }
+        h3 { font-size: 1.3rem; color: #34d399; margin: 12px 0 6px 0; }
+        p, li { font-size: 1.15rem; line-height: 1.6; color: #e2e8f0; margin-bottom: 10px; }
+        ul, ol { margin-left: 25px; }
+
+        .highlight-box { background: rgba(56, 189, 248, 0.1); border-left: 4px solid #38bdf8; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .question-box { background: rgba(251, 191, 36, 0.1); border-left: 4px solid #fbbf24; padding: 15px; border-radius: 8px; margin: 15px 0; }
+        .formula-box { background: #0f172a; border: 2px solid #38bdf8; border-radius: 12px; padding: 15px; text-align: center; font-size: 1.5rem; font-weight: bold; color: #fbbf24; margin: 15px 0; }
+        
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #0f172a; border-radius: 8px; overflow: hidden; }
+        th, td { border: 1px solid #334155; padding: 12px; text-align: center; font-size: 1.1rem; }
+        th { background: #1e293b; color: #38bdf8; font-weight: bold; }
+
+        .controls { position: fixed; bottom: 20px; right: 30px; display: flex; gap: 10px; z-index: 100; }
+        .btn { background: #0284c7; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+        .btn:hover { background: #0369a1; }
+        .slide-number { position: fixed; bottom: 25px; left: 30px; color: #94a3b8; font-weight: bold; font-size: 1.1rem; }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .math-symbol { font-family: 'Times New Roman', serif; font-style: italic; }
     </style>
 </head>
 <body>
-    <nav><h2>📚 TRẠM HỌC TẬP - LỚP 12</h2></nav>
-    <div class="container">
-        <h1>Lộ trình chinh phục đại học</h1>
-        <div class="subject-grid">
-            <div class="subject-card">
-                <h2 class="math">📐 Toán Học</h2>
-                <ul class="note-list">
-                    <li><b>Hàm số:</b> Nhớ cực trị hàm bậc 3.</li>
-                    <li><b>Nguyên hàm:</b> Bảng công thức trang 122.</li>
-                </ul>
-                <button class="add-btn">Ghi chú thêm</button>
-            </div>
-            <div class="subject-card">
-                <h2 class="physics">⚡ Vật Lý</h2>
-                <ul class="note-list">
-                    <li><b>Dao động cơ:</b> x = Acos(ωt + φ).</li>
-                    <li><b>Sóng cơ:</b> Giao thoa và sóng dừng.</li>
-                </ul>
-                <button class="add-btn">Ghi chú thêm</button>
-            </div>
-            <div class="subject-card">
-                <h2 class="literature">📖 Ngữ Văn</h2>
-                <ul class="note-list">
-                    <li><b>Tây Tiến:</b> Vẻ đẹp bi tráng.</li>
-                    <li><b>Việt Bắc:</b> Tình quân dân.</li>
-                </ul>
-                <button class="add-btn">Ghi chú thêm</button>
+
+<div class="slide-container" id="slider">
+
+    <!-- Slide 1 -->
+    <div class="slide" id="slide1">
+        <div class="card" style="text-align: center;">
+            <p style="color: #94a3b8; font-weight: bold; letter-spacing: 1px;">CHƯƠNG II: KHÍ LÍ TƯỞNG</p>
+            <h1>BÀI 9: ĐỊNH LUẬT BOYLE</h1>
+            <p style="font-style: italic; color: #cbd5e1;">Vật lí 12 - Bộ sách Kết nối tri thức với cuộc sống</p>
+            
+            <div class="question-box" style="margin-top: 40px; text-align: left;">
+                <p style="color: #fbbf24; font-weight: bold;">❓ Câu hỏi mở đầu (SGK Trang 37):</p>
+                <p><i>"Khi thay đổi thể tích của một khối lượng khí xác định ở nhiệt độ không đổi thì áp suất khí thay đổi như thế nào?"</i></p>
             </div>
         </div>
     </div>
-    <footer><p>Cố lên Thịnh nhé! 🚀</p></footer>
+
+    <!-- Slide 2 -->
+    <div class="slide" id="slide2">
+        <div class="card">
+            <h2>I. CÁC THÔNG SỐ TRẠNG THÁI CỦA MỘT LƯỢNG KHÍ</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>1. Các thông số trạng thái</h3>
+                    <ul>
+                        <li><b>Khối lượng (<span class="math-symbol">m</span>)</b></li>
+                        <li><b>Thể tích (<span class="math-symbol">V</span>)</b> — Đơn vị SI: m³</li>
+                        <li><b>Áp suất (<span class="math-symbol">p</span>)</b> — Đơn vị SI: Pascal (Pa)</li>
+                        <li><b>Nhiệt độ tuyệt đối (<span class="math-symbol">T</span>)</b> — Đơn vị SI: Kelvin (K)</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><b>Trạng thái cân bằng:</b> Khi các thông số <span class="math-symbol">V, T, p</span> không thay đổi theo thời gian.</p>
+                </div>
+                <div>
+                    <h3>2. Quá trình biến đổi trạng thái</h3>
+                    <div class="highlight-box" style="text-align: center;">
+                        <p><b>Trạng thái 1</b> (<span class="math-symbol">p₁, V₁, T₁</span>) &nbsp;➔&nbsp; <b>Trạng thái 2</b> (<span class="math-symbol">p₂, V₂, T₂</span>)</p>
+                    </div>
+                    <div class="question-box">
+                        <p style="color: #fbbf24; font-weight: bold;">❓ Thảo luận (Hình 9.3 SGK):</p>
+                        <p>So sánh các thông số trạng thái của không khí trong quả bóng bay khi để trong bóng mát và khi để ngoài nắng?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" id="slide3">
+        <div class="card">
+            <h2>II. ĐỊNH LUẬT BOYLE</h2>
+            <h3>1. Quá trình đẳng nhiệt</h3>
+            <p>Quá trình biến đổi trạng thái của một khối lượng khí xác định khi <b>nhiệt độ giữ không đổi</b> gọi là quá trình đẳng nhiệt.</p>
+
+            <h3>2. Thí nghiệm khảo sát mối quan hệ p và V (Bảng 9.1 SGK)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lần thí nghiệm</th>
+                        <th>Thể tích <span class="math-symbol">V</span> (cm³)</th>
+                        <th>Áp suất <span class="math-symbol">p</span> (10⁵ Pa)</th>
+                        <th>Tích <span class="math-symbol">p · V</span> (10⁵ Pa · cm³)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>3,0</td><td>1,0</td><td><b>3,0</b></td></tr>
+                    <tr><td>2</td><td>2,5</td><td>1,2</td><td><b>3,0</b></td></tr>
+                    <tr><td>3</td><td>2,0</td><td>1,5</td><td><b>3,0</b></td></tr>
+                    <tr><td>4</td><td>1,5</td><td>1,9</td><td><b>2,85 (≈ 3,0)</b></td></tr>
+                </tbody>
+            </table>
+            <p style="color: #34d399; font-weight: bold;">👉 Nhận xét: Tích <span class="math-symbol">p · V</span> trong các lần thí nghiệm là một giá trị xấp xỉ không đổi (<span class="math-symbol">p · V ≈ hằng số</span>).</p>
+        </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide" id="slide4">
+        <div class="card">
+            <h2>3. NỘI DUNG ĐỊNH LUẬT BOYLE & ĐỒ THỊ</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.25rem; color: #38bdf8;"><b>Phát biểu định luật:</b> Khi nhiệt độ của một khối lượng khí xác định giữ không đổi thì áp suất gây ra bởi khí tỉ lệ nghịch với thể tích của nó.</p>
+            </div>
+            
+            <div class="grid-2" style="margin-top: 15px;">
+                <div>
+                    <h3>Biểu thức định luật:</h3>
+                    <div class="formula-box">
+                        p · V = hằng số<br>
+                        <span style="font-size: 1.2rem; color: #38bdf8;">hoặc</span> &nbsp; p₁ · V₁ = p₂ · V₂
+                    </div>
+                    <p style="font-size: 0.95rem; color: #94a3b8;">* Do nhà vật lí Robert Boyle (1627 – 1691) phát minh năm 1662.</p>
+                </div>
+                <div>
+                    <h3>Đồ thị đường đẳng nhiệt:</h3>
+                    <ul>
+                        <li><b>Hệ tọa độ (p, V):</b> Đường biểu diễn là một nhánh của đường <b>Hyperbol</b>.</li>
+                        <li>Đường đẳng nhiệt ở nhiệt độ cao hơn nằm ở phía trên (<span class="math-symbol">T₂ > T₁</span>).</li>
+                        <li><b>Hệ tọa độ (p, 1/V):</b> Đường biểu diễn là đường thẳng kéo dài đi qua gốc tọa độ.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide" id="slide5">
+        <div class="card">
+            <h2>BÀI TẬP VÍ DỤ MẪU (SGK Trang 39)</h2>
+            <p><b>Đề bài:</b> Một lượng khí có thể tích là 10 lít ở áp suất 10⁵ Pa. Tính thể tích của lượng khí này ở áp suất 1,25 · 10⁵ Pa, biết nhiệt độ không đổi.</p>
+            
+            <div class="highlight-box">
+                <p style="color: #fbbf24; font-weight: bold; margin-bottom: 10px;">Các bước giải chuẩn SGK:</p>
+                <ol>
+                    <li><b>Bước 1:</b> Xác định quá trình biến đổi trạng thái: Đây là quá trình đẳng nhiệt (<span class="math-symbol">T = hằng số</span>).</li>
+                    <li><b>Bước 2:</b> Tóm tắt hai trạng thái:
+                        <ul>
+                            <li>Trạng thái 1: <span class="math-symbol">p₁ = 10⁵ Pa &nbsp;;&nbsp; V₁ = 10 lít</span></li>
+                            <li>Trạng thái 2: <span class="math-symbol">p₂ = 1,25 · 10⁵ Pa &nbsp;;&nbsp; V₂ = ?</span></li>
+                        </ul>
+                    </li>
+                    <li><b>Bước 3:</b> Áp dụng định luật Boyle:
+                        <p style="color: #38bdf8; font-weight: bold; margin-top: 5px;">
+                            p₁ · V₁ = p₂ · V₂ &nbsp;➔&nbsp; V₂ = (p₁ · V₁) / p₂ = (10⁵ · 10) / (1,25 · 10⁵) = 8 lít.
+                        </p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide" id="slide6">
+        <div class="card">
+            <h2>BÀI TẬP VẬN DỤNG (SGK Trang 40)</h2>
+            <div class="question-box">
+                <p><b>Bài 1 (Bóng cao su):</b> Quả bóng chứa 0,04 m³ không khí ở áp suất 120 kPa. Tính áp suất khi làm giảm thể tích bóng còn 0,025 m³ ở nhiệt độ không đổi?</p>
+                <p style="color: #34d399; margin-top: 8px;">👉 <b>Lời giải:</b> <span class="math-symbol">p₂ = (p₁ · V₁) / V₂ = (120 · 0,04) / 0,025 = <b>192 kPa</b></span>.</p>
+            </div>
+
+            <div class="question-box">
+                <p><b>Bài 2 (Bọt khí dưới giếng):</b> Bọt khí nổi từ đáy giếng sâu 6 m lên mặt nước. Khi lên mặt nước, thể tích bọt khí tăng bao nhiêu lần? (Cho <span class="math-symbol">p₀ = 1,013 · 10⁵ Pa, D = 1003 kg/m³</span>).</p>
+                <p style="color: #34d399; margin-top: 8px;">👉 <b>Lời giải:</b><br>
+                - Áp suất đáy giếng: <span class="math-symbol">p₁ = p₀ + ρgh = 1,013 · 10⁵ + (1003 · 9,8 · 6) ≈ 1,60 · 10⁵ Pa</span>.<br>
+                - Tỉ lệ tăng thể tích: <span class="math-symbol">V₂ / V₁ = p₁ / p₀ = (1,60 · 10⁵) / (1,013 · 10⁵) ≈ <b>1,58 lần</b></span>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide" id="slide7">
+        <div class="card">
+            <h2>TỔNG KẾT BÀI HỌC (SGK Trang 40)</h2>
+            <div class="grid-2">
+                <div class="highlight-box">
+                    <h3 style="color: #fbbf24;">📌 EM ĐÃ HỌC</h3>
+                    <ul>
+                        <li>Trạng thái & Quá trình biến đổi trạng thái: (<span class="math-symbol">p₁, V₁, T₁</span>) ➔ (<span class="math-symbol">p₂, V₂, T₂</span>).</li>
+                        <li>Định luật Boyle: Khi nhiệt độ giữ không đổi, <span class="math-symbol">p · V = hằng số</span> hay <span class="math-symbol">p₁ · V₁ = p₂ · V₂</span>.</li>
+                    </ul>
+                </div>
+                <div class="highlight-box" style="border-left-color: #34d399;">
+                    <h3 style="color: #34d399;">💡 EM CÓ THỂ</h3>
+                    <ul>
+                        <li>Giải thích nguyên lý hoạt động của ống tiêm xi-lanh và bơm xe đạp.</li>
+                        <li>Giải thích cơ chế hít thở của con người và lý do bọt khí phình to khi nổi từ dưới nước sâu lên.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="slide-number" id="slideNum">Slide 1 / 7</div>
+<div class="controls">
+    <button class="btn" onclick="prevSlide()">❮ Trước</button>
+    <button class="btn" onclick="nextSlide()">Tiếp ❯</button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const slider = document.getElementById('slider');
+    const slideNum = document.getElementById('slideNum');
+
+    function updateSlide() {
+        slides[currentSlide].scrollIntoView({ behavior: 'smooth' });
+        slideNum.innerText = `Slide ${currentSlide + 1} / ${slides.length}`;
+    }
+
+    function nextSlide() {
+        if (currentSlide < slides.length - 1) {
+            currentSlide++;
+            updateSlide();
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide--;
+            updateSlide();
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+        if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') prevSlide();
+    });
+</script>
+
 </body>
 </html>
